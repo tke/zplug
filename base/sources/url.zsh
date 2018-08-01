@@ -106,10 +106,26 @@ __zplug::sources::url::get()
     eval "$cmd $url" \
         &>/dev/null
 
-    __zplug::utils::releases::index \
-        "$repo" \
-        "$artifact" \
-        &>/dev/null &&
+    case "$artifact" in
+        *.zip)
+                unzip "$artifact"
+                rm -f "$artifact"
+            ;;
+        *.tar.bz2)
+                tar jxvf "$artifact"
+                rm -f "$artifact"
+            ;;
+        *.tar.gz|*.tgz)
+                tar xvf "$artifact"
+                rm -f "$artifact"
+            ;;
+        *.*)
+            return 1
+            ;;
+        *)
+            # Through
+            ;;
+    esac &&
         echo "$url" >|"$tags[dir]/INDEX"
     )
 
