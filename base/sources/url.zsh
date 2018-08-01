@@ -125,7 +125,7 @@ __zplug::sources::url::get()
         *)
             # Through
             ;;
-    esac &&
+    esac &>/dev/null &&
         echo "$url" >|"$tags[dir]/INDEX"
     )
 
