@@ -12,9 +12,9 @@ __zplug::log::format::with_json()
     builtin printf '"dir":"%s",' "$PWD"
     builtin printf '"message":'
     if $is_message_json; then
-        builtin printf "$message"
+        builtin printf "%s" $message"
     else
-        builtin printf "$message" \
+        builtin printf "%s" $message" \
             | __zplug::utils::ansi::remove \
             | __zplug::utils::shell::json_escape \
             | tr -d '\n'
